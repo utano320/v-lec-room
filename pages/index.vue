@@ -1,15 +1,7 @@
 <template>
   <div id="app">
-    <input
-      id="msg"
-      v-model="msg"
-      type="text">
-    <button @click="send">送信</button>
-    <ul>
-      <li
-        v-for="log in logs"
-        :key="log">{{ log }}</li>
-    </ul>
+    <a href="/admin">講師はこちら</a>
+    <a href="/members">受講者はこちら</a>
   </div>
 </template>
 
