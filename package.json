@@ -5,9 +5,11 @@
     "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
+    "@nuxtjs/dotenv": "^1.1.1",
     "lodash": "^4.17.10",
     "moment": "^2.22.1",
-    "nuxt": "^1.4.0"
+    "nuxt": "^1.4.0",
+    "socket.io": "^2.1.1"
   },
   "devDependencies": {
     "eslint": "^4.19.1",

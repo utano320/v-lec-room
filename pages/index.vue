@@ -1,8 +1,15 @@
 <template>
   <div id="app">
-    <h1>MyApp</h1>
-    <p>{{ msg }}</p>
-    <p>{{ now() }}</p>
+    <input
+      id="msg"
+      v-model="msg"
+      type="text">
+    <button @click="send">送信</button>
+    <ul>
+      <li
+        v-for="log in logs"
+        :key="log">{{ log }}</li>
+    </ul>
   </div>
 </template>
 

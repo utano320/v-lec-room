@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
   build: {
     vendor: ['moment', 'lodash'],
@@ -11,5 +13,9 @@ module.exports = {
         });
       }
     }
+  },
+  modules: ['@nuxtjs/dotenv'],
+  env: {
+    WS_HOST: process.env.WS_HOST || 'localhost:8000'
   }
 };
