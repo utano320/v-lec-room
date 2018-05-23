@@ -13,6 +13,13 @@
         <input type="submit" class="chatbox-send" value="送信" @click.prevent="send">
       </form>
     </div>
+    <div id="members">
+      <ul id="members-list">
+        <li v-for="(member, sid) in members" :key="sid" class="members-item">
+          {{ sid.substr(0, 4) }} : {{ member.name }}
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 

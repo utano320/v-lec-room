@@ -11,14 +11,18 @@ export default {
       name: this.initName(),
       msg: '',
       socket: null,
-      logs: []
+      logs: [],
+      members: {}
     };
   },
   mounted: function() {
     this.socket = io(process.env.WS_HOST);
     this.socket.on('emit_from_server', this.addLogs);
+    this.socket.on('room', this.setMembers);
+
     this.socket.json.emit('join', {
-      room: this.roomId
+      room: this.roomId,
+      name: this.name
     });
   },
   methods: {
@@ -37,6 +41,9 @@ export default {
         let chatBoxList = document.getElementById('chatbox-list');
         chatBoxList.scrollTop = chatBoxList.scrollHeight - chatBoxList.clientHeight;
       }, 200);
+    },
+    setMembers(data) {
+      Vue.set(this.$data, 'members', data.members);
     },
     initName() {
       const l = 4;
