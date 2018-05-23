@@ -1,6 +1,22 @@
 #app {
   font-family: Verdana, sans-serif;
 
+  #name {
+    border: 1px solid #ccc;
+    border-radius: 0.2em;
+    font-size: 1em;
+    padding: 0.2em;
+  }
+
+  #status {
+    display: block;
+    width: 100px;
+    height: 1em;
+    margin: 1em;
+    border-radius: 0.5em;
+    border: 1px solid #dfdfdf;
+  }
+
   #chatbox {
     margin-top: 1em;
     #chatbox-list {
@@ -39,6 +55,51 @@
         font-weight: bold;
         color: #339;
       }
+    }
+  }
+
+  #members {
+    width: 300px;
+    font-size: 80%;
+    #members-list {
+      border: 1px solid #dfdfdf;
+      border-radius: 0.5em;
+      margin: 1em 0;
+      padding: 0;
+      list-style-type: none;
+      .members-item {
+        margin: 0;
+        padding: 0.2em;
+      }
+    }
+  }
+
+  #actionbox {
+    button {
+      border: 0;
+      font-size: 80%;
+      margin: 1em;
+      font-weight: bold;
+      padding: 1em;
+      border-radius: 1em;
+      width: 8em;
+      outline: 0;
+      cursor: pointer;
+    }
+    .action-blue {
+      background-color: skyblue;
+    }
+    .action-yellow {
+      background-color: #f9f999;
+    }
+    .action-red {
+      background-color: tomato;
+    }
+    .action-gray {
+      background-color: lightgray;
+    }
+    .action-white {
+      border: 1px solid #efefef;
     }
   }
 }

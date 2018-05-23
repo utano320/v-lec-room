@@ -2,7 +2,7 @@
   <div id="app">
     <div>
       ユーザ名：
-      <input v-model="name" type="text">
+      <input id="name" v-model="name" type="text">
     </div>
     <div id="chatbox">
       <ul id="chatbox-list">
@@ -15,8 +15,8 @@
     </div>
     <div id="members">
       <ul id="members-list">
-        <li v-for="(member, sid) in members" :key="sid" class="members-item">
-          {{ sid.substr(0, 4) }} : {{ member.name }}
+        <li v-for="(member, sid) in members" :key="sid" :style="{backgroundColor:member.color}" class="members-item">
+          {{ member.name }}
         </li>
       </ul>
     </div>

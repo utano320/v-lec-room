@@ -12,12 +12,13 @@ export default {
       msg: '',
       socket: null,
       logs: [],
-      members: {}
+      members: {},
+      statusColor: 'white'
     };
   },
   mounted: function() {
     this.socket = io(process.env.WS_HOST);
-    this.socket.on('emit_from_server', this.addLogs);
+    this.socket.on('message', this.addLogs);
     this.socket.on('room', this.setMembers);
 
     this.socket.json.emit('join', {
@@ -27,7 +28,7 @@ export default {
   },
   methods: {
     send() {
-      this.socket.json.emit('emit_from_client', {
+      this.socket.json.emit('send', {
         room: this.roomId,
         name: this.name,
         msg: this.msg
@@ -51,6 +52,10 @@ export default {
       let name = '';
       for (let i = 0; i < l; i++) name += cList[Math.floor(Math.random() * cList.length)];
       return 'guest_' + name;
+    },
+    action(statusColor) {
+      this.statusColor = statusColor;
+      this.socket.json.emit('status', { color: statusColor });
     }
   }
 };

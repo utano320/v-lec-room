@@ -1,6 +1,13 @@
 #app {
   font-family: Verdana, sans-serif;
 
+  #name {
+    border: 1px solid #ccc;
+    border-radius: 0.2em;
+    font-size: 1em;
+    padding: 0.2em;
+  }
+
   #chatbox {
     margin-top: 1em;
     #chatbox-list {
@@ -38,6 +45,22 @@
         border-radius: 0.2em;
         font-weight: bold;
         color: #339;
+      }
+    }
+  }
+
+  #members {
+    width: 300px;
+    font-size: 80%;
+    #members-list {
+      border: 1px solid #dfdfdf;
+      border-radius: 0.5em;
+      margin: 1em 0;
+      padding: 0;
+      list-style-type: none;
+      .members-item {
+        margin: 0;
+        padding: 0.2em;
       }
     }
   }
