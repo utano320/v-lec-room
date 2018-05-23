@@ -8,6 +8,7 @@ export default {
   data() {
     return {
       roomId: this.$route.params.room_id,
+      name: 'teacher',
       msg: '',
       socket: null,
       logs: []
@@ -24,12 +25,18 @@ export default {
     send() {
       this.socket.json.emit('emit_from_client', {
         room: this.roomId,
+        name: this.name,
         msg: this.msg
       });
       this.msg = '';
+      document.getElementById('msg').focus();
     },
     addLogs(data) {
       Vue.set(this.logs, this.logs.length, data);
+      setTimeout(() => {
+        let chatBoxList = document.getElementById('chatbox-list');
+        chatBoxList.scrollTop = chatBoxList.scrollHeight - chatBoxList.clientHeight;
+      }, 200);
     }
   }
 };

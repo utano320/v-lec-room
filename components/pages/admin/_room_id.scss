@@ -1,8 +1,44 @@
 #app {
   font-family: Verdana, sans-serif;
-  color: skyblue;
 
-  p {
-    color: tomato;
+  #chatbox {
+    margin-top: 1em;
+    #chatbox-list {
+      height: 200px;
+      overflow: auto;
+      background-color: #dfdfdf;
+      color: #333;
+      list-style: none;
+      margin-bottom: 0;
+      padding: 0;
+      margin: 0;
+      .chatbox-item {
+        font-size: 80%;
+        margin: 0.5em;
+      }
+    }
+    .chatbox-input {
+      width: 100%;
+      background-color: #efefef;
+      padding: 3px 0;
+      .chatbox-msg {
+        width: 77%;
+        margin: 0 3%;
+        padding: 1%;
+        border: 0;
+        font-size: 80%;
+      }
+      .chatbox-send {
+        width: 12%;
+        margin: 0 3% 0 0;
+        padding: 1% 0;
+        border: 0;
+        font-size: 80%;
+        background-color: #ccf;
+        border-radius: 0.2em;
+        font-weight: bold;
+        color: #339;
+      }
+    }
   }
 }
