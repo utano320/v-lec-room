@@ -1,10 +1,11 @@
 <template>
   <div id="app">
     <p>RoomId を入力してください。</p>
-    <form :action="'/admin/' + roomId">
+    <form action="/admin/room">
       <input
         v-model="roomId"
-        type="text">
+        type="text"
+        name="id">
       <input
         type="submit"
         value="移動">

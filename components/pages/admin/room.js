@@ -1,13 +1,11 @@
 import Vue from 'vue';
 import io from 'socket.io-client';
+import url from 'url';
 
 export default {
-  validate({ params }) {
-    return /^[a-z]{4}$/.test(params.room_id);
-  },
   data() {
     return {
-      roomId: this.$route.params.room_id,
+      roomId: false,
       name: '',
       msg: '',
       socket: null,
@@ -17,6 +15,9 @@ export default {
   },
   mounted: function() {
     setTimeout(() => {
+      this.roomId = this.initRoomId();
+      if (!this.roomId) location.href = '/admin/';
+
       this.name = this.initName();
 
       this.socket = io(process.env.WS_HOST);
@@ -56,6 +57,11 @@ export default {
     initName() {
       if (localStorage.getItem('name')) return localStorage.getItem('name');
       return 'teacher';
+    },
+    initRoomId() {
+      let parseUrl = url.parse(location.href, true);
+      let roomId = parseUrl.query['id'];
+      return roomId && roomId.match(/^[a-z]{4}$/) ? roomId : false;
     }
   }
 };
