@@ -1,112 +1,17 @@
 <template>
   <div id="app">
-    <div>
-      ユーザ名：
-      <input
-        id="name"
-        v-model="name"
-        type="text">
-    </div>
-
-    <chatbox
-      :name="name"
-      :room-id="roomId"
-      :socket="socket"
-      :logs="logs"
-      :send="send"
-    />
-
-    <members
-      :room-id="roomId"
-      :socket="socket"
-      :members="members"
+    <chat-room
+      :mode="'admin'"
     />
   </div>
 </template>
 
 <script>
-import Vue from 'vue';
-import io from 'socket.io-client';
-import url from 'url';
-import chatbox from '~/components/chatbox.vue';
-import members from '~/components/members.vue';
+import chatRoom from '~/components/chat-room.vue';
 
 export default {
   components: {
-    chatbox,
-    members
-  },
-  data() {
-    return {
-      roomId: '',
-      name: '',
-      socket: null,
-      members: {},
-      logs: []
-    };
-  },
-  mounted: function() {
-    setTimeout(() => {
-      this.socket = io(process.env.WS_HOST);
-
-      this.roomId = this.initRoomId();
-      if (this.roomId === '') location.href = '/members/';
-
-      this.name = this.initName();
-
-      this.socket.on('message', this.addLogs);
-      this.socket.on('room', this.setRoom);
-
-      this.socket.json.emit('join', { room: this.roomId, name: this.name });
-    }, 200);
-  },
-  methods: {
-    send(msg) {
-      if (msg === '') return;
-
-      this.socket.json.emit('send', {
-        room: this.roomId,
-        name: this.name,
-        msg: msg
-      });
-    },
-    addLogs(data) {
-      Vue.set(this.logs, this.logs.length, data);
-      this.scrollLogs();
-    },
-    setRoom(data) {
-      Vue.set(this.$data, 'logs', data.logs);
-      Vue.set(this.$data, 'members', data.members);
-      this.scrollLogs();
-    },
-    scrollLogs() {
-      setTimeout(() => {
-        let chatBoxList = document.getElementById('chatbox-list');
-        chatBoxList.scrollTop = chatBoxList.scrollHeight - chatBoxList.clientHeight;
-      }, 200);
-    },
-    initName() {
-      if (localStorage.getItem('name')) return localStorage.getItem('name');
-      return 'teacher';
-    },
-    initRoomId() {
-      let parseUrl = url.parse(location.href, true);
-      let roomId = parseUrl.query['id'];
-      return roomId && roomId.match(/^[a-z]{4}$/) ? roomId : '';
-    }
+    'chat-room': chatRoom
   }
 };
 </script>
-
-<style scoped lang="scss">
-#app {
-  font-family: Verdana, sans-serif;
-
-  #name {
-    border: 1px solid #ccc;
-    border-radius: 0.2em;
-    font-size: 1em;
-    padding: 0.2em;
-  }
-}
-</style>

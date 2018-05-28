@@ -4,7 +4,7 @@
       <li
         v-for="(member, sid) in members"
         :key="sid"
-        :style="{backgroundColor:member.color}"
+        :style="memberBgColor(member)"
         class="members-item">
         {{ member.name }}
       </li>
@@ -26,6 +26,19 @@ export default {
     members: {
       type: Object,
       default: null
+    },
+    mode: {
+      type: String,
+      default: 'members'
+    }
+  },
+  methods: {
+    memberBgColor(member) {
+      if (this.mode === 'members') return {};
+
+      return {
+        backgroundColor: member.color
+      };
     }
   }
 };
