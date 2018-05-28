@@ -13,5 +13,23 @@
   </div>
 </template>
 
-<script src="~/components/pages/admin/index.js"></script>
-<style scoped lang="scss" src="~/components/pages/admin/index.scss"></style>
+<script>
+export default {
+  data() {
+    return {
+      roomId: ''
+    };
+  }
+};
+</script>
+
+<style scoped lang="scss">
+#app {
+  font-family: Verdana, sans-serif;
+  color: skyblue;
+
+  p {
+    color: tomato;
+  }
+}
+</style>

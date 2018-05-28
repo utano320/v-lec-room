@@ -6,6 +6,9 @@
         id="name"
         v-model="name"
         type="text">
+      <span
+        id="status"
+        :style="{backgroundColor:statusColor}" />
     </div>
 
     <chatbox
@@ -15,6 +18,24 @@
       :logs="logs"
       :send="send"
     />
+
+    <div id="actionbox">
+      <button
+        class="action-blue"
+        @click="action('skyblue')">理解してる</button>
+      <button
+        class="action-yellow"
+        @click="action('#f9f999')">あやしい</button>
+      <button
+        class="action-red"
+        @click="action('tomato')">わからない</button>
+      <button
+        class="action-gray"
+        @click="action('lightgray')">質問したい</button>
+      <button
+        class="action-white"
+        @click="action('white')">クリア</button>
+    </div>
 
     <members
       :room-id="roomId"
@@ -42,7 +63,8 @@ export default {
       name: '',
       socket: null,
       members: {},
-      logs: []
+      logs: [],
+      statusColor: 'white'
     };
   },
   mounted: function() {
@@ -87,12 +109,21 @@ export default {
     },
     initName() {
       if (localStorage.getItem('name')) return localStorage.getItem('name');
-      return 'teacher';
+
+      const l = 4;
+      const cList = 'abcdefghijklmnopqrstuvwxyz';
+      let name = '';
+      for (let i = 0; i < l; i++) name += cList[Math.floor(Math.random() * cList.length)];
+      return 'guest_' + name;
     },
     initRoomId() {
       let parseUrl = url.parse(location.href, true);
       let roomId = parseUrl.query['id'];
       return roomId && roomId.match(/^[a-z]{4}$/) ? roomId : '';
+    },
+    action(statusColor) {
+      this.statusColor = statusColor;
+      this.socket.json.emit('status', { color: statusColor });
     }
   }
 };
@@ -107,6 +138,44 @@ export default {
     border-radius: 0.2em;
     font-size: 1em;
     padding: 0.2em;
+  }
+
+  #status {
+    display: block;
+    width: 100px;
+    height: 1em;
+    margin: 1em;
+    border-radius: 0.5em;
+    border: 1px solid #dfdfdf;
+  }
+
+  #actionbox {
+    button {
+      border: 0;
+      font-size: 80%;
+      margin: 1em;
+      font-weight: bold;
+      padding: 1em;
+      border-radius: 1em;
+      width: 8em;
+      outline: 0;
+      cursor: pointer;
+    }
+    .action-blue {
+      background-color: skyblue;
+    }
+    .action-yellow {
+      background-color: #f9f999;
+    }
+    .action-red {
+      background-color: tomato;
+    }
+    .action-gray {
+      background-color: lightgray;
+    }
+    .action-white {
+      border: 1px solid #efefef;
+    }
   }
 }
 </style>

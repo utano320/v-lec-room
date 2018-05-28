@@ -5,5 +5,28 @@
   </div>
 </template>
 
-<script src="~/components/pages/index.js"></script>
-<style scoped lang="scss" src="~/components/pages/index.scss"></style>
+<script>
+export default {};
+</script>
+
+<style scoped lang="scss">
+#app {
+  font-family: Verdana, sans-serif;
+  color: skyblue;
+  width: 100%;
+
+  a {
+    display: block;
+    width: 10em;
+    text-decoration: none;
+    margin: 2em auto;
+    padding: 1em;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #339;
+    background-color: skyblue;
+    border-radius: 1em;
+  }
+}
+</style>

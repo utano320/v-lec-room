@@ -1,10 +1,11 @@
 <template>
   <div id="app">
     <p>RoomId を入力してください。</p>
-    <form :action="'/members/' + roomId">
+    <form action="/members/room">
       <input
         v-model="roomId"
-        type="text">
+        type="text"
+        name="id">
       <input
         type="submit"
         value="移動">
@@ -12,5 +13,23 @@
   </div>
 </template>
 
-<script src="~/components/pages/members/index.js"></script>
-<style scoped lang="scss" src="~/components/pages/members/index.scss"></style>
+<script>
+export default {
+  data() {
+    return {
+      roomId: ''
+    };
+  }
+};
+</script>
+
+<style scoped lang="scss">
+#app {
+  font-family: Verdana, sans-serif;
+  color: skyblue;
+
+  p {
+    color: tomato;
+  }
+}
+</style>
